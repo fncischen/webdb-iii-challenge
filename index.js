@@ -50,6 +50,45 @@ server.delete("/api/cohorts/:id", (req,res) => {
 //#endregion
 
 //#region students
+
+server.post("/api/students", (req,res) => {
+    db("students").insert(req.body)
+        .then(result => res.status(200).json(result))
+        .catch(() => res.status(500).json({message: "There was an error in posting your student"}))
+})
+
+server.get("/api/students/", (req,res) => {
+    db("students")
+    .then(result => res.status(200).json(result))
+    .catch(() => res.status(500).json({message: "There was an error in retrieving your students"}))
+})
+
+server.get("/api/students/:id", (req,res) => {
+    db("students")
+    .where({id: req.params.id})
+    .then(result => res.status(200).json(result))
+    .catch(() => res.status(500).json({message: `No such student with id ${req.params.id} exists`}));
+})
+
+server.put("/api/students/:id", (req,res) => {
+    db("students")
+    .where({id: req.params.id})
+    .update(req.body)
+    .then(result => res.status(200).json(result))
+    .catch(() => res.status(500).json({message: `There was an error in updating your student with ${req.params.id}`}));
+})
+
+server.delete("/api/students/:id", (req,res) => {
+    db("students")
+    .where({id: req.params.id})
+    .del()
+    .then(result => res.status(200).json(result))
+    .catch(() => res.status(500).json({message: `There was an error in deleting your student with ${req.params.id}`}));
+})
+
+
+
+
 //#endregion  
 
 const port = 5000;

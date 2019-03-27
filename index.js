@@ -49,3 +49,9 @@ server.delete("/api/cohorts/:id", (req,res) => {
 })
 
 //#endregion
+
+const port = 5000;
+
+server.listen(port, () =>
+  console.log('Server running on http://localhost:5000')
+);

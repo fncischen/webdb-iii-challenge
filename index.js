@@ -25,9 +25,8 @@ server.get("/api/cohorts/:id", (req,res) => {
 })
 
 server.get("/api/cohorts/:id/students", (req,res) => {
-    db("cohorts")
-    .where({id: req.params.id})
-    
+    db("students")
+    .where({cohort_id: req.params.id})
     .then(result => res.status(200).json(result))
     .catch(() => res.status(500).json({message: `No such cohort with id ${req.params.id} exists`}));
 })
@@ -49,6 +48,9 @@ server.delete("/api/cohorts/:id", (req,res) => {
 })
 
 //#endregion
+
+//#region students
+//#endregion  
 
 const port = 5000;
 
